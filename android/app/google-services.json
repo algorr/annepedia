@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "246157387969",
+    "project_id": "annepedia-a3d8a",
+    "storage_bucket": "annepedia-a3d8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246157387969:android:3048a89efc85e4496c0c40",
+        "android_client_info": {
+          "package_name": "com.example.annepedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246157387969-g5jivbg2djkfmpppkadhh1v6703b2gb8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.annepedia",
+            "certificate_hash": "cf09a127f61402cfc433a17e356185016c8b3951"
+          }
+        },
+        {
+          "client_id": "246157387969-856sqokqe77218doir2jqj2gi12vor8r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmlDjbbrTFpVr3VBQFMBNjCAJnugaaWXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246157387969-856sqokqe77218doir2jqj2gi12vor8r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
