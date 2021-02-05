@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'pages/questions.dart';
 import 'pages/wellComePage.dart';
 
 Future<void> main() async {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'annepedia',
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      home: LandingPage(),
+      home: Questions(),
     );
   }
 }

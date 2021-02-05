@@ -14,13 +14,39 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [
-        Text('Çıkış'),
-      ],
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {},
+          child: Icon(
+            Icons.logout,
+            size: 26.0,
+          ),
+        ),
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(right: 5.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Icon(
+                  Icons.search,
+                  size: 26.0,
+                ),
+              )
+          ),
+          Padding(
+              padding: EdgeInsets.only(right: 5.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: Icon(
+                    Icons.more_vert
+                ),
+              )
+          ),
+        ],
         centerTitle: true,
         backgroundColor: Colors.purple.shade400,
         title: Text(
-          'Ana Sayfa',
+          'annepedia',
           style: TextStyle(fontFamily: 'Ubuntu'),
         ),
       ),
@@ -31,7 +57,6 @@ class _HomePageState extends State<HomePage> {
               'Hoşgeldin ${FirebaseAuth.instance.currentUser.displayName}',
               style: TextStyle(fontFamily: 'Ubuntu'),
             ),
-
           ],
         ),
       ),
