@@ -1,4 +1,3 @@
-
 import 'package:annepedia/Authentication/registerPage.dart';
 import 'package:annepedia/designs/slide_dot.dart';
 import 'package:annepedia/models/model.dart';
@@ -16,10 +15,12 @@ class _WellComePageState extends State<WellComePage> {
   int _currenPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     Timer.periodic(Duration(seconds: 5), (timer) {
       if (_currenPage < 6) {
         _currenPage++;
@@ -118,12 +119,13 @@ class _WellComePageState extends State<WellComePage> {
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                            for(int i =0; i < slideList.length; i++)
-                              if(i == _currenPage)
-                                SlideDots(true)
-                            else 
-                              SlideDots(false)
-                          ],),
+                              for (int i = 0; i < slideList.length; i++)
+                                if (i == _currenPage)
+                                  SlideDots(true)
+                                else
+                                  SlideDots(false)
+                            ],
+                          ),
                         ),
                       ],
                     )
@@ -131,10 +133,14 @@ class _WellComePageState extends State<WellComePage> {
                 ),
               ),
               FlatButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()));
-                },
+                onPressed: _currenPage < 5
+                    ? null
+                    : () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterPage()));
+                      },
                 color: Colors.purple,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),

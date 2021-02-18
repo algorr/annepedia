@@ -254,8 +254,6 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _SignIn() async {
-    var authCredentials = EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD;
-
     try {
       UserCredential _user = await _auth.signInWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);

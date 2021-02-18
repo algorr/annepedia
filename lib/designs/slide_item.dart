@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 class SlideItem extends StatelessWidget {
   final int index;
-
   SlideItem(this.index);
 
   @override

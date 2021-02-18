@@ -1,8 +1,12 @@
-import 'file:///C:/Users/algor/AndroidStudioProjects/annepedia/lib/Authentication/landing_page.dart';
+
+
+import 'package:annepedia/Authentication/landing_page.dart';
+import 'package:annepedia/Authentication/registerPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'Authentication/sign_in_page.dart';
 import 'pages/questions.dart';
 import 'pages/wellComePage.dart';
 
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'annepedia',
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      home: Questions(),
+      home: WellComePage(),
     );
   }
 }

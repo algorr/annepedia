@@ -4,19 +4,21 @@ import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
   var user = FirebaseAuth.instance.currentUser;
 
-  HomePage({Key key, this.user}) : super(key: key);
+
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: () {},
+          //onTap: cikisYap(),
           child: Icon(
             Icons.logout,
             size: 26.0,
@@ -61,5 +63,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  cikisYap() async {
+    if(_auth.currentUser != null){
+      await _auth.signOut();
+    }else {
+      debugPrint("zaten kullanıcı yok");
+    }
+
   }
 }

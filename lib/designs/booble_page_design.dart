@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Questions extends StatefulWidget {
+class BooblePage extends StatefulWidget {
   @override
-  _QuestionsState createState() => _QuestionsState();
+  _BooblePageState createState() => _BooblePageState();
 }
 
 enum Type { Type1, Type2, Type3, Type4 }
 
-class _QuestionsState extends State<Questions> {
+class _BooblePageState extends State<BooblePage> {
   Type myTape = Type.Type1;
 
   @override
@@ -72,26 +72,12 @@ class _QuestionsState extends State<Questions> {
                     Container(
                       margin: EdgeInsets.all(10),
                       width: size.width,
-                      height: 220,
+                      height: 200,
                       child: Card(
                         elevation: 15,
                         child: Column(
                           children: [
-                            Container(margin: EdgeInsets.only(left: 25, top: 10),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Şu an ne durumdayız?",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: 'Ubuntu',
-                                        color: Colors.deepPurple),
-                                  ),
-                                ],
-                              ),
-                            ),
                             RadioListTile<Type>(
-                                activeColor: Colors.deepPurple,
                                 title: Text("Anne"),
                                 value: Type.Type1,
                                 groupValue: myTape,
@@ -101,7 +87,6 @@ class _QuestionsState extends State<Questions> {
                                   });
                                 }),
                             RadioListTile<Type>(
-                                activeColor: Colors.deepPurple,
                                 title: Text("Hamile"),
                                 value: Type.Type2,
                                 groupValue: myTape,
@@ -111,7 +96,6 @@ class _QuestionsState extends State<Questions> {
                                   });
                                 }),
                             RadioListTile<Type>(
-                                activeColor: Colors.deepPurple,
                                 title: Text("Anne olmak istiyorum"),
                                 value: Type.Type3,
                                 groupValue: myTape,

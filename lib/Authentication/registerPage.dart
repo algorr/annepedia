@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               Positioned(
-                top: 50,
+                top: 80,
                 child: Column(
                   children: [
                     Row(
@@ -158,9 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       Pattern pattern =
                                           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                       RegExp regex = new RegExp(pattern);
-                                     /* return (!regex.hasMatch(val))
-                                          ? 'not valid email'
-                                          : null;*/
+
                                       if(!regex.hasMatch(val))
                                       showDialog(
                                           context: context, builder: (context) {
@@ -320,6 +318,10 @@ class _RegisterPageState extends State<RegisterPage> {
       if (_newUser != null) {
         if (!_newUser.emailVerified) {
           await _newUser.sendEmailVerification();
+          if(_auth.currentUser != null){
+            debugPrint("size bir mail attık lütfen onaylayın");
+            await _auth.signOut();
+          }
         }
         await _newUser.updateProfile(displayName: _displayUsername.text);
         final user1 = _auth.currentUser;

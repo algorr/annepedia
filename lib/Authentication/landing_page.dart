@@ -14,11 +14,6 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   final _user =  FirebaseAuth.instance.currentUser;
 
-  @override
-  void initState()  {
-    super.initState();
-    _checkUser();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +21,11 @@ class _LandingPageState extends State<LandingPage> {
     if(_user == null){
       return RegisterPage();
     }else {
-      return HomePage(user: _user,);
+      return HomePage();
     }
   }
 
-  Future<void> _checkUser() async {
+  Future<User> _checkUser() async {
     await _user.updateProfile();
-
   }
 }
