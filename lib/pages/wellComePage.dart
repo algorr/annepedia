@@ -1,6 +1,7 @@
-import 'file:///C:/Users/algor/AndroidStudioProjects/annepedia/lib/Authentication/registerPage.dart';
-import 'file:///C:/Users/algor/AndroidStudioProjects/annepedia/lib/models/model.dart';
-import 'file:///C:/Users/algor/AndroidStudioProjects/annepedia/lib/designs/slide_dot.dart';
+
+import 'package:annepedia/Authentication/registerPage.dart';
+import 'package:annepedia/designs/slide_dot.dart';
+import 'package:annepedia/models/model.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 

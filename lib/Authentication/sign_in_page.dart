@@ -4,7 +4,6 @@ import '../pages/home_page.dart';
 import 'package:annepedia/models/user.dart';
 
 class SignInPage extends StatefulWidget {
-
   final Function(FirebaseAuth) onSignIn;
 
   const SignInPage({Key key, @required this.onSignIn}) : super(key: key);
@@ -27,7 +26,6 @@ class _SignInPageState extends State<SignInPage> {
       body: SingleChildScrollView(
         controller: ScrollController(initialScrollOffset: 1),
         child: Container(
-
           height: size.height,
           width: double.infinity,
           child: Stack(
@@ -240,7 +238,6 @@ class _SignInPageState extends State<SignInPage> {
                               SizedBox(
                                 height: 20,
                               ),
-
                             ],
                           ),
                         ),
@@ -257,6 +254,34 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _SignIn() async {
+    var authCredentials = EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD;
 
+    try {
+      UserCredential _user = await _auth.signInWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+      await _auth.currentUser.updateProfile(displayName: _displayUsername.text);
+    } catch (e) {
+      if (_emailController.text != FirebaseAuth.instance.currentUser.email) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Email Hatası'),
+                content: Text(
+                    'Hatalı bir email adresi girdiniz, lütfen kontrol ederek tekrar giriniz'),
+                actions: [
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Tamam'),
+                  ),
+                ],
+              );
+            });
+      }
+    }
   }
 }
