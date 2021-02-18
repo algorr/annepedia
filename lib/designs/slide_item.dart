@@ -1,4 +1,5 @@
-import 'file:///C:/Users/algor/AndroidStudioProjects/annepedia/lib/models/model.dart';
+
+import 'package:annepedia/models/model.dart';
 import 'package:flutter/material.dart';
 
 class SlideItem extends StatelessWidget {

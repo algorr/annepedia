@@ -1,8 +1,10 @@
-import 'file:///C:/Users/algor/AndroidStudioProjects/annepedia/lib/Authentication/landing_page.dart';
+
+import 'package:annepedia/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'Authentication/landing_page.dart';
 import 'pages/wellComePage.dart';
 
 Future<void> main() async {
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'annepedia',
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      home: LandingPage(),
+      home: WellComePage(),
     );
   }
 }
