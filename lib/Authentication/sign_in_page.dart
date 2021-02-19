@@ -268,7 +268,7 @@ class _SignInPageState extends State<SignInPage> {
               return AlertDialog(
                 title: Text('Email Hatası'),
                 content: Text(
-                    'Hatalı bir email adresi girdiniz, lütfen kontrol ederek tekrar giriniz'),
+                    'Hatalı bir email girdiniz, lütfen kontrol ederek tekrar giriniz'),
                 actions: [
                   FlatButton(
                     onPressed: () {

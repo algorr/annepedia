@@ -1,3 +1,5 @@
+import 'package:annepedia/pages/home_page.dart';
+import 'package:annepedia/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class Questions extends StatefulWidget {
@@ -63,6 +65,7 @@ class _QuestionsState extends State<Questions> {
                       margin: EdgeInsets.all(10),
                       child: Text(
                         "Sana daha iyi sonuçlar getirmem için aşağıdaki soruları cevaplayabilir misin?",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'Ubuntu',
@@ -77,7 +80,8 @@ class _QuestionsState extends State<Questions> {
                         elevation: 15,
                         child: Column(
                           children: [
-                            Container(margin: EdgeInsets.only(left: 25, top: 10),
+                            Container(
+                              margin: EdgeInsets.only(left: 25, top: 10),
                               child: Row(
                                 children: [
                                   Text(
@@ -128,6 +132,9 @@ class _QuestionsState extends State<Questions> {
                 ),
               ),
               FlatButton(
+                onPressed: () {
+                  sonucGetir();
+                },
                 color: Colors.purple,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -143,5 +150,15 @@ class _QuestionsState extends State<Questions> {
         ],
       ),
     );
+  }
+
+  void sonucGetir() {
+    if (myTape == Type.Type1) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage()));
+    } else if (myTape == Type.Type2) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage()));
+    } else if (myTape == Type.Type3) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage()));
+    }
   }
 }

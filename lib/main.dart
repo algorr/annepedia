@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'Authentication/sign_in_page.dart';
+import 'pages/home_page.dart';
 import 'pages/questions.dart';
 import 'pages/wellComePage.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'annepedia',
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      home: WellComePage(),
+      home: HomePage(),
     );
   }
 }
