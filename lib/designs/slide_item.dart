@@ -1,9 +1,9 @@
-
 import 'package:annepedia/models/model.dart';
 import 'package:flutter/material.dart';
 
 class SlideItem extends StatelessWidget {
   final int index;
+
   SlideItem(this.index);
 
   @override
@@ -35,6 +35,7 @@ class SlideItem extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Text(
                 slideList[index].slogan,
+                textAlign: TextAlign.center,
                 overflow: TextOverflow.visible,
                 style: TextStyle(
                   fontFamily: 'Ubuntu',

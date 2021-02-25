@@ -19,7 +19,6 @@ class Users {
       'createdAt' : createdAt,
       'updatedAt' : updatedAt,
       'seviye' : seviye,
-
     };
   }
 }

@@ -3,7 +3,6 @@ import 'package:annepedia/designs/slide_dot.dart';
 import 'package:annepedia/models/model.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import '../designs/slide_item.dart';
 
 class WellComePage extends StatefulWidget {
@@ -12,9 +11,8 @@ class WellComePage extends StatefulWidget {
 }
 
 class _WellComePageState extends State<WellComePage> {
-  int _currenPage = 0;
+  int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
-
 
   @override
   void initState() {
@@ -22,12 +20,12 @@ class _WellComePageState extends State<WellComePage> {
     super.initState();
 
     Timer.periodic(Duration(seconds: 5), (timer) {
-      if (_currenPage < 6) {
-        _currenPage++;
+      if (_currentPage < 6) {
+        _currentPage++;
       } else {
-        _currenPage = 6;
+        _currentPage = 6;
       }
-      _pageController.animateToPage(_currenPage,
+      _pageController.animateToPage(_currentPage,
           duration: Duration(milliseconds: 300), curve: Curves.easeIn);
     });
   }
@@ -41,7 +39,7 @@ class _WellComePageState extends State<WellComePage> {
 
   _onPageChanged(int index) {
     setState(() {
-      _currenPage = index;
+      _currentPage = index;
     });
   }
 
@@ -120,7 +118,7 @@ class _WellComePageState extends State<WellComePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               for (int i = 0; i < slideList.length; i++)
-                                if (i == _currenPage)
+                                if (i == _currentPage)
                                   SlideDots(true)
                                 else
                                   SlideDots(false)
@@ -133,7 +131,7 @@ class _WellComePageState extends State<WellComePage> {
                 ),
               ),
               FlatButton(
-                onPressed: _currenPage < 5
+                onPressed: _currentPage < 5
                     ? null
                     : () {
                         Navigator.push(

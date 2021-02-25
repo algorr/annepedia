@@ -1,4 +1,3 @@
-import 'package:annepedia/pages/home_page.dart';
 import 'package:annepedia/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -64,8 +63,8 @@ class _QuestionsState extends State<Questions> {
                     Container(
                       margin: EdgeInsets.all(10),
                       child: Text(
-                        "Sana daha iyi sonuçlar getirmem için aşağıdaki soruları cevaplayabilir misin?",
-                        textAlign: TextAlign.center,
+                        "Sana daha iyi sonuçlar getirmem için aşağıdaki soruları cevaplayabilir misin?", textAlign: TextAlign.center,
+
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'Ubuntu',

@@ -1,9 +1,8 @@
 import 'package:annepedia/models/user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthBase {
   Future<Users> currentUser();
-  Future<Users> signInEmailPassword();
+  Future<Users> signInWithEmailAndPassword(String email, String password);
   Future<bool> signOut();
-
+  Future<Users> createUserWithEmailandPassword(String email, String password);
 }

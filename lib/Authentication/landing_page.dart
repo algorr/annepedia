@@ -1,31 +1,20 @@
-
+import 'package:annepedia/Authentication/sign_in_page.dart';
 import 'package:annepedia/pages/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'registerPage.dart';
-
-class LandingPage extends StatefulWidget {
-  @override
-  _LandingPageState createState() => _LandingPageState();
-}
-
-class _LandingPageState extends State<LandingPage> {
-  final _user =  FirebaseAuth.instance.currentUser;
-
-
+class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _userModel = Provider.of<UserModel>(context, listen: false);
 
-    if(_user == null){
-      return RegisterPage();
-    }else {
-      return HomePage();
+    if (_userModel.user == null) {
+      return SignInPage();
+    } else {
+      return HomePage(
+        user: _userModel.user,
+      );
     }
-  }
-
-  Future<User> _checkUser() async {
-    await _user.updateProfile();
   }
 }

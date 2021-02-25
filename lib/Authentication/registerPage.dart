@@ -1,25 +1,35 @@
+import 'package:annepedia/models/user.dart';
+import 'package:annepedia/pages/wellComePage.dart';
+import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import '../pages/home_page.dart';
 import 'sign_in_page.dart';
 
 class RegisterPage extends StatefulWidget {
+  final Users user;
+
+  RegisterPage({Key key, this.user}) : super(key: key);
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _displayUsername = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  bool isShowing = false;
+
+  _RegisterPageState();
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         controller: ScrollController(initialScrollOffset: 1),
@@ -29,6 +39,16 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Stack(
             alignment: Alignment.center,
             children: [
+              isShowing == true
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        //value: 5,
+                        backgroundColor: Colors.purple,
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                      ),
+                    )
+                  : Container(),
               Positioned(
                 top: 0,
                 left: 0,
@@ -99,17 +119,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                   validator: (String val) {
                                     if (val.isEmpty) {
                                       showDialog(
-                                          context: context, builder: (context) {
-                                        return AlertDialog(
-                                          title: Text('Kullanıcı Adı Hatası'),
-                                          content: Text('Kullanıcı adını boş geçilemez, lütfen uygun bir kullanıcı adı belirleyiniz'),
-                                          actions: [
-                                            FlatButton(onPressed: (){
-                                              Navigator.pop(context);
-                                            }, child: Text('Tamam'),),
-                                          ],
-                                        );
-                                      });
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title:
+                                                  Text('Kullanıcı Adı Hatası'),
+                                              content: Text(
+                                                  'Kullanıcı adını boş geçilemez, lütfen uygun bir kullanıcı adı belirleyiniz'),
+                                              actions: [
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text('Tamam'),
+                                                ),
+                                              ],
+                                            );
+                                          });
                                     }
                                     return null;
                                   },
@@ -118,6 +144,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       hintStyle: TextStyle(
                                           color: Colors.purple.shade100),
                                       border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
                                       icon: Icon(
                                         Icons.person,
                                         color: Colors.purple.shade100,
@@ -143,35 +170,45 @@ class _RegisterPageState extends State<RegisterPage> {
                                   validator: (String val) {
                                     if (val.isEmpty) {
                                       showDialog(
-                                          context: context, builder: (context) {
-                                        return AlertDialog(
-                                          title: Text('Email Hatası'),
-                                          content: Text('Email alanı boş geçilemez, lütfen uygun bir email giriniz'),
-                                          actions: [
-                                            FlatButton(onPressed: (){
-                                              Navigator.pop(context);
-                                            }, child: Text('Tamam'),),
-                                          ],
-                                        );
-                                      });
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text('Email Hatası'),
+                                              content: Text(
+                                                  'Email alanı boş geçilemez, lütfen uygun bir email giriniz'),
+                                              actions: [
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text('Tamam'),
+                                                ),
+                                              ],
+                                            );
+                                          });
                                     } else if (val.isNotEmpty) {
                                       Pattern pattern =
                                           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                       RegExp regex = new RegExp(pattern);
 
-                                      if(!regex.hasMatch(val))
-                                      showDialog(
-                                          context: context, builder: (context) {
-                                        return AlertDialog(
-                                          title: Text('Email Hatası'),
-                                          content: Text('Hatalı bir email adresi girdiniz, lütfen kontrol ederek tekrar giriniz'),
-                                          actions: [
-                                            FlatButton(onPressed: (){
-                                              Navigator.pop(context);
-                                            }, child: Text('Tamam'),),
-                                          ],
-                                        );
-                                      });
+                                      if (!regex.hasMatch(val))
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text('Email Hatası'),
+                                                content: Text(
+                                                    'Hatalı bir email adresi girdiniz, lütfen kontrol ederek tekrar giriniz'),
+                                                actions: [
+                                                  FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('Tamam'),
+                                                  ),
+                                                ],
+                                              );
+                                            });
                                     }
                                     return null;
                                   },
@@ -209,17 +246,22 @@ class _RegisterPageState extends State<RegisterPage> {
                                   validator: (String val) {
                                     if (val.isEmpty) {
                                       showDialog(
-                                          context: context, builder: (context) {
-                                        return AlertDialog(
-                                          title: Text('Şifre Hatası'),
-                                          content: Text('Şifre alanı boş geçilemez, lütfen uygun bir şifre giriniz'),
-                                          actions: [
-                                            FlatButton(onPressed: (){
-                                              Navigator.pop(context);
-                                            }, child: Text('Tamam'),),
-                                          ],
-                                        );
-                                      });
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text('Şifre Hatası'),
+                                              content: Text(
+                                                  'Şifre alanı boş geçilemez, lütfen uygun bir şifre giriniz'),
+                                              actions: [
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text('Tamam'),
+                                                ),
+                                              ],
+                                            );
+                                          });
                                     }
                                     return null;
                                   },
@@ -249,6 +291,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         vertical: 20, horizontal: 20),
                                     onPressed: () async {
                                       if (_formKey.currentState.validate()) {
+                                        isShowing = true;
                                         _emailSifreKullaniciOlustur();
                                       }
                                     },
@@ -310,29 +353,33 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _emailSifreKullaniciOlustur() async {
+    final _userModel = Provider.of<UserModel>(context);
     try {
       UserCredential _userCredential =
-      await _auth.createUserWithEmailAndPassword(
-          email: _emailController.text, password: _passwordController.text);
+          await _auth.createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
       User _newUser = _userCredential.user;
+      //isShowing == true;
       if (_newUser != null) {
         if (!_newUser.emailVerified) {
           await _newUser.sendEmailVerification();
-          if(_auth.currentUser != null){
-            debugPrint("size bir mail attık lütfen onaylayın");
+
+          if (_auth.currentUser != null) {
             await _auth.signOut();
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => WellComePage()));
           }
         }
         await _newUser.updateProfile(displayName: _displayUsername.text);
-        final user1 = _auth.currentUser;
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage()));
+        //final user1 = _auth.currentUser;
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => HomePage(
+                  user: _userModel.user,
+                )));
       }
     } catch (e) {
       debugPrint("******************HATA*******************");
       debugPrint(e.toString());
     }
   }
-
-
 }

@@ -1,23 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../pages/home_page.dart';
 import 'package:annepedia/models/user.dart';
+import 'package:annepedia/services/auth_base.dart';
+import 'package:annepedia/services/firebase_auth_service.dart';
+import 'package:annepedia/viewmodel/user_model.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../locator.dart';
+import '../pages/home_page.dart';
 
 class SignInPage extends StatefulWidget {
-  final Function(FirebaseAuth) onSignIn;
-
-  const SignInPage({Key key, @required this.onSignIn}) : super(key: key);
-
   @override
   _SignInPageState createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _displayUsername = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  AuthBase authService = locator<FirebaseAuthService>();
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +224,7 @@ class _SignInPageState extends State<SignInPage> {
                                         vertical: 20, horizontal: 20),
                                     onPressed: () async {
                                       if (_formKey.currentState.validate()) {
-                                        _SignIn();
+                                        _signIn(context);
                                       }
                                     },
                                     child: Text(
@@ -253,15 +254,22 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  void _SignIn() async {
+  void _signIn(BuildContext context) async {
+    final _userModel = Provider.of<UserModel>(context);
     try {
-      UserCredential _user = await _auth.signInWithEmailAndPassword(
-          email: _emailController.text, password: _passwordController.text);
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
-      await _auth.currentUser.updateProfile(displayName: _displayUsername.text);
+      Users _user = await _userModel.signInWithEmailAndPassword(
+          _emailController.text, _passwordController.text);
+      if (_user != null) {
+        Future.delayed(Duration(milliseconds: 1), () {
+          Navigator.of(context).popUntil(ModalRoute.withName("/"));
+        });
+      }
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => HomePage(
+                user: _userModel.user,
+              )));
     } catch (e) {
-      if (_emailController.text != FirebaseAuth.instance.currentUser.email) {
+      if (_emailController.text != _userModel.user.email) {
         showDialog(
             context: context,
             builder: (context) {

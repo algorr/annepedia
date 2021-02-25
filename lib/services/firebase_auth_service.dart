@@ -8,10 +8,11 @@ class FirebaseAuthService implements AuthBase {
   @override
   Future<Users> currentUser() async {
     try {
-      User user = await _firebaseAuth.currentUser;
+      User user = _firebaseAuth.currentUser;
       return _userFromFirebase(user);
     } catch (e) {
       print('HATA CURRENT USER' + e.toString());
+      return null;
     }
   }
 
@@ -32,9 +33,17 @@ class FirebaseAuthService implements AuthBase {
     }
   }
 
+
+
   @override
-  Future<Users> signInEmailPassword() {
-    // TODO: implement signInEmailPassword
+  Future<Users> createUserWithEmailandPassword(String email, String password) {
+
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Users> signInWithEmailAndPassword(String email, String password) {
+    // TODO: implement signInWithEmailAndPassword
     throw UnimplementedError();
   }
 }

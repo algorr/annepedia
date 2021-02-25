@@ -1,17 +1,22 @@
+import 'package:annepedia/models/user.dart';
+import 'package:annepedia/services/auth_base.dart';
+import 'package:annepedia/services/firebase_auth_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  var user = FirebaseAuth.instance.currentUser;
+import '../locator.dart';
 
+class HomePage extends StatefulWidget {
+
+  final AuthBase authService = locator<FirebaseAuthService>();
+  final Users user;
+
+   HomePage({Key key,@required this.user,}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: cikisYap(),
+          onTap: cikisYap,
           child: Icon(
             Icons.logout,
             size: 26.0,
@@ -55,13 +60,13 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            _auth.currentUser == null
+            widget.authService.currentUser() == null
                 ? Text(
                     'Hoşgeldin ',
                     style: TextStyle(fontFamily: 'Ubuntu'),
                   )
                 : Text(
-                    'Hoşgeldin ${FirebaseAuth.instance.currentUser.displayName}',
+                    'Hoşgeldin ${widget.user.userName}',
                     style: TextStyle(fontFamily: 'Ubuntu'),
                   ),
           ],
@@ -70,11 +75,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  cikisYap() {
-    if (_auth.currentUser != null) {
-      _auth.signOut();
-    } else {
-      debugPrint("zaten kullanıcı yok");
-    }
+  Future<bool> cikisYap() async {
+  bool sonuc =  await widget.authService.signOut();
+
+   return sonuc;
   }
 }

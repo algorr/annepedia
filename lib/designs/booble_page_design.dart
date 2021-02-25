@@ -121,6 +121,7 @@ class _BooblePageState extends State<BooblePage> {
                   style: TextStyle(
                       fontSize: 16, color: Colors.white, fontFamily: 'Ubuntu'),
                 ),
+                onPressed: (){},
               ),
             ],
           ),
