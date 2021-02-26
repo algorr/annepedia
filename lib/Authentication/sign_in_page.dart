@@ -148,7 +148,7 @@ class _SignInPageState extends State<SignInPage> {
                                   decoration: InputDecoration(
                                       hintText: 'anne@annepedia.com',
                                       hintStyle: TextStyle(
-                                          color: Colors.purple.shade100),
+                                          color: Colors.purple.shade100, decoration: TextDecoration.none),
                                       border: InputBorder.none,
                                       icon: Icon(
                                         Icons.person,
@@ -174,7 +174,6 @@ class _SignInPageState extends State<SignInPage> {
                                     borderRadius: BorderRadius.circular(29)),
                                 child: TextFormField(
                                   obscureText: true,
-                                  keyboardType: TextInputType.visiblePassword,
                                   controller: _passwordController,
                                   validator: (String val) {
                                     if (val.isEmpty) {
@@ -255,15 +254,13 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _signIn(BuildContext context) async {
-    final _userModel = Provider.of<UserModel>(context);
+    _formKey.currentState.save();
+    final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
       Users _user = await _userModel.signInWithEmailAndPassword(
           _emailController.text, _passwordController.text);
-      if (_user != null) {
-        Future.delayed(Duration(milliseconds: 1), () {
-          Navigator.of(context).popUntil(ModalRoute.withName("/"));
-        });
-      }
+
+      _user.userName = _displayUsername.text;
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => HomePage(
                 user: _userModel.user,

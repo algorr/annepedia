@@ -39,8 +39,10 @@ class UserRepository implements AuthBase {
   }
 
   @override
-  Future<Users> signInWithEmailAndPassword(String email, String password) {
-    // TODO: implement signInWithEmailAndPassword
+  Future<Users> signInWithEmailAndPassword(String email, String password) async{
+    if(appMode == AppMode.RELEASE){
+      return await _firebaseAuthService.signInWithEmailAndPassword(email, password);
+    }
     throw UnimplementedError();
   }
 }

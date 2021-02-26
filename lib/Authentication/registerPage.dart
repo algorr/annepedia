@@ -353,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _emailSifreKullaniciOlustur() async {
-    final _userModel = Provider.of<UserModel>(context);
+    final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
       UserCredential _userCredential =
           await _auth.createUserWithEmailAndPassword(

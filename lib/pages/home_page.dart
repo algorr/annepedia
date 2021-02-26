@@ -1,4 +1,5 @@
 import 'package:annepedia/models/user.dart';
+import 'package:annepedia/pages/wellComePage.dart';
 import 'package:annepedia/services/auth_base.dart';
 import 'package:annepedia/services/firebase_auth_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -77,7 +78,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> cikisYap() async {
   bool sonuc =  await widget.authService.signOut();
-
+  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> WellComePage()));
    return sonuc;
   }
 }
