@@ -43,7 +43,7 @@ class FirebaseAuthService implements AuthBase {
     }catch(e){
     return null;
     }
-    throw UnimplementedError();
+
   }
 
   @override

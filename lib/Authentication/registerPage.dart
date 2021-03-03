@@ -144,7 +144,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       hintStyle: TextStyle(
                                           color: Colors.purple.shade100),
                                       border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
+                                      //focusedBorder: InputBorder.none,
                                       icon: Icon(
                                         Icons.person,
                                         color: Colors.purple.shade100,

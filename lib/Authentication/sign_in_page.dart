@@ -150,6 +150,9 @@ class _SignInPageState extends State<SignInPage> {
                                       hintStyle: TextStyle(
                                           color: Colors.purple.shade100, decoration: TextDecoration.none),
                                       border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
                                       icon: Icon(
                                         Icons.person,
                                         color: Colors.purple.shade100,
