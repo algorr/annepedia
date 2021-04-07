@@ -127,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               content: Text(
                                                   'Kullanıcı adını boş geçilemez, lütfen uygun bir kullanıcı adı belirleyiniz'),
                                               actions: [
-                                                FlatButton(
+                                                TextButton(
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
@@ -177,7 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               content: Text(
                                                   'Email alanı boş geçilemez, lütfen uygun bir email giriniz'),
                                               actions: [
-                                                FlatButton(
+                                                TextButton(
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
@@ -200,7 +200,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 content: Text(
                                                     'Hatalı bir email adresi girdiniz, lütfen kontrol ederek tekrar giriniz'),
                                                 actions: [
-                                                  FlatButton(
+                                                  TextButton(
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                     },
@@ -253,7 +253,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               content: Text(
                                                   'Şifre alanı boş geçilemez, lütfen uygun bir şifre giriniz'),
                                               actions: [
-                                                FlatButton(
+                                                TextButton(
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
@@ -353,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _emailSifreKullaniciOlustur() async {
-    final _userModel = Provider.of<UserModel>(context, listen: false);
+    final _userModel = Provider.of<UserModel>(context);
     try {
       UserCredential _userCredential =
           await _auth.createUserWithEmailAndPassword(

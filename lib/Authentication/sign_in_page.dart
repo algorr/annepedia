@@ -1,3 +1,4 @@
+import 'package:annepedia/Authentication/registerPage.dart';
 import 'package:annepedia/models/user.dart';
 import 'package:annepedia/services/auth_base.dart';
 import 'package:annepedia/services/firebase_auth_service.dart';
@@ -18,10 +19,11 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  AuthBase authService = locator<FirebaseAuthService>();
+  //AuthBase authService = locator<FirebaseAuthService>();
 
   @override
   Widget build(BuildContext context) {
+    final _userModel = Provider.of<UserModel>(context,listen: true);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -108,7 +110,7 @@ class _SignInPageState extends State<SignInPage> {
                                               content: Text(
                                                   'Email alanı boş geçilemez, lütfen uygun bir email giriniz'),
                                               actions: [
-                                                FlatButton(
+                                                TextButton(
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
@@ -133,7 +135,7 @@ class _SignInPageState extends State<SignInPage> {
                                                 content: Text(
                                                     'Hatalı bir email adresi girdiniz, lütfen kontrol ederek tekrar giriniz'),
                                                 actions: [
-                                                  FlatButton(
+                                                  TextButton(
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                     },
@@ -148,7 +150,8 @@ class _SignInPageState extends State<SignInPage> {
                                   decoration: InputDecoration(
                                       hintText: 'anne@annepedia.com',
                                       hintStyle: TextStyle(
-                                          color: Colors.purple.shade100, decoration: TextDecoration.none),
+                                          color: Colors.purple.shade100,
+                                          decoration: TextDecoration.none),
                                       border: InputBorder.none,
                                       focusedBorder: InputBorder.none,
                                       errorBorder: InputBorder.none,
@@ -188,7 +191,7 @@ class _SignInPageState extends State<SignInPage> {
                                               content: Text(
                                                   'Şifre alanı boş geçilemez, lütfen uygun bir şifre giriniz'),
                                               actions: [
-                                                FlatButton(
+                                                TextButton(
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
@@ -241,6 +244,22 @@ class _SignInPageState extends State<SignInPage> {
                               SizedBox(
                                 height: 20,
                               ),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Text("Kayıt olmadıysan, lütfen", style: TextStyle(color: Colors.deepPurple),),
+                                    SizedBox(width: 3,),
+                                    GestureDetector(
+                                      child: Text("Kayıt Ol", style: TextStyle(color: Colors.red, fontFamily: 'Ubuntu', fontSize: 15)),
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  RegisterPage())),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -278,7 +297,7 @@ class _SignInPageState extends State<SignInPage> {
                 content: Text(
                     'Hatalı bir email girdiniz, lütfen kontrol ederek tekrar giriniz'),
                 actions: [
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },

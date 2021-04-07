@@ -21,7 +21,6 @@ class FirebaseAuthService implements AuthBase {
     return Users(userID: user.uid, email: user.email);
   }
 
-
   @override
   Future<bool> signOut() async {
     try {
@@ -33,27 +32,29 @@ class FirebaseAuthService implements AuthBase {
     }
   }
 
-
-
   @override
-  Future<Users> createUserWithEmailandPassword(String email, String password) async{
-    try{
-      User user  = (await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password)).user;
-    return _userFromFirebase(user);
-    }catch(e){
-    return null;
+  Future<Users> createUserWithEmailandPassword(
+      String email, String password) async {
+    try {
+      User user = (await _firebaseAuth.createUserWithEmailAndPassword(
+              email: email, password: password))
+          .user;
+      return _userFromFirebase(user);
+    } catch (e) {
+      return null;
     }
-
   }
 
   @override
-  Future<Users> signInWithEmailAndPassword(String email, String password) async {
-    try{
-      User user  = (await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password)).user;
+  Future<Users> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      User user = (await _firebaseAuth.signInWithEmailAndPassword(
+              email: email, password: password))
+          .user;
       return _userFromFirebase(user);
-    }catch(e){
+    } catch (e) {
       return null;
     }
-
   }
 }

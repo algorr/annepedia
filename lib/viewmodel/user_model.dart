@@ -32,10 +32,7 @@ class UserModel with ChangeNotifier implements AuthBase {
     try {
       state = ViewState.Busy;
       _user = await _userRepository.currentUser();
-      if (_user != null)
-        return _user;
-      else
-        return null;
+     return _user;
     } catch (e) {
       debugPrint("Viewmodeldeki current user hata:" + e.toString());
       return null;

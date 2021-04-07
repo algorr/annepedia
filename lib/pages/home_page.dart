@@ -1,14 +1,12 @@
 import 'package:annepedia/models/user.dart';
 import 'package:annepedia/pages/profile_page.dart';
-import 'package:annepedia/pages/wellComePage.dart';
-import 'package:annepedia/services/auth_base.dart';
-import 'package:annepedia/services/firebase_auth_service.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../locator.dart';
 
 class HomePage extends StatefulWidget {
-  final AuthBase authService = locator<FirebaseAuthService>();
+
   final Users user;
 
   HomePage({
@@ -23,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final _userModel = Provider.of<UserModel>(context,listen: true);
     return Scaffold(
       backgroundColor: Color(0XFFEEEEEE),
       bottomNavigationBar: Container(
@@ -34,15 +33,29 @@ class _HomePageState extends State<HomePage> {
                 icon: Image.asset('assets/icons/home.png', color: Colors.white),
                 onPressed: () {}),
             IconButton(
-                icon: Image.asset('assets/icons/search.png', color: Colors.white,),
+                icon: Image.asset(
+                  'assets/icons/search.png',
+                  color: Colors.white,
+                ),
                 onPressed: () {}),
             IconButton(
-                icon: Image.asset('assets/icons/calendar.png', color: Colors.white,),
+                icon: Image.asset(
+                  'assets/icons/question.png',
+                  color: Colors.white,
+                ),
                 onPressed: () {}),
             IconButton(
-                icon: Image.asset('assets/icons/female.png', color: Colors.white),
+                icon: Image.asset(
+                  'assets/icons/calendar.png',
+                  color: Colors.white,
+                ),
+                onPressed: () {}),
+            IconButton(
+                icon:
+                    Image.asset('assets/icons/female.png', color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfilePage()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
                 }),
           ],
         ),
@@ -55,14 +68,6 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         elevation: 0,
-        leading: GestureDetector(
-          onTap: cikisYap,
-          child: Icon(
-            Icons.logout,
-            color: Color(0XFF4A148C),
-            size: 26.0,
-          ),
-        ),
         actions: [
           Padding(
               padding: EdgeInsets.only(right: 5.0),
@@ -84,13 +89,13 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            widget.authService.currentUser() == null
+            _userModel.currentUser() != null
                 ? Text(
-                    'Hoşgeldin ',
+                    'Hoşgeldin ${_userModel.user.userID}',
                     style: TextStyle(fontFamily: 'Ubuntu'),
                   )
                 : Text(
-                    'Hoşgeldin Kullanıcı',
+                    "Kullanıcı ",
                     style: TextStyle(
                       fontFamily: 'Ubuntu',
                       color: Color(0XFF4A148C),
@@ -100,12 +105,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  Future<bool> cikisYap() async {
-    bool sonuc = await widget.authService.signOut();
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => WellComePage()));
-    return sonuc;
   }
 }

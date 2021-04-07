@@ -1,17 +1,17 @@
+import 'package:annepedia/Authentication/landing_page.dart';
 import 'package:annepedia/locator.dart';
 import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'pages/wellComePage.dart';
+
 
 Future<void> main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
-
   SystemChrome.setEnabledSystemUIOverlays([]);
 }
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'annepedia',
           theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-          home: WellComePage()),
+          home: LandingPage()),
     );
   }
 }
