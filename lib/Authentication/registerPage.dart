@@ -1,5 +1,4 @@
 import 'package:annepedia/models/user.dart';
-import 'package:annepedia/pages/wellComePage.dart';
 import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
     debugPrint(
         "email: " + _email + "şifre:" + _password);
     final _userModel = Provider.of<UserModel>(context,listen: false);
-    Users _kayitOlanUser = await _userModel.createUserWithEmailandPassword(_email, _password);
+    Users _kayitOlanUser = await _userModel.createUserWithEmailandPassword(_email, _password, _userName);
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage(user: _kayitOlanUser)));
   }
 

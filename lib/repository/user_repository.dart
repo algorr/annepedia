@@ -2,7 +2,6 @@ import 'package:annepedia/models/user.dart';
 import 'package:annepedia/services/auth_base.dart';
 import 'package:annepedia/services/firebase_auth_service.dart';
 import 'package:annepedia/services/firestore_db_service.dart';
-import 'package:flutter/cupertino.dart';
 import '../locator.dart';
 
 enum AppMode { DEBUG, RELEASE }
@@ -32,10 +31,10 @@ class UserRepository implements AuthBase {
 
   @override
   Future<Users> createUserWithEmailandPassword(
-      String email, String password) async {
+      String email, String password, String userName) async {
     if (appMode == AppMode.RELEASE) {
       Users _user = await _firebaseAuthService.createUserWithEmailandPassword(
-          email, password);
+          email, password, userName);
       bool _kayit = await _firestoreDBService.saveUser(_user);
       if (_kayit) {
         return _user;
@@ -43,6 +42,7 @@ class UserRepository implements AuthBase {
         return null;
       }
     }
+    return null;
   }
 
   @override

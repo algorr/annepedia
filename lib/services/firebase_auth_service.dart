@@ -18,7 +18,7 @@ class FirebaseAuthService implements AuthBase {
 
   Users _userFromFirebase(User user) {
     if (user == null) return null;
-    return Users(userID: user.uid, email: user.email);
+    return Users(userID: user.uid, email: user.email, userName: user.displayName);
   }
 
   @override
@@ -34,7 +34,7 @@ class FirebaseAuthService implements AuthBase {
 
   @override
   Future<Users> createUserWithEmailandPassword(
-      String email, String password) async {
+      String email, String password, String userName) async {
     try {
       User user = (await _firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password))
