@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final _userModel = Provider.of<UserModel>(context,listen: true);
+    final _userModel = Provider.of<UserModel>(context);
     return Scaffold(
       backgroundColor: Color(0XFFEEEEEE),
       bottomNavigationBar: Container(
@@ -89,18 +89,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            _userModel.currentUser() != null
-                ? Text(
-                    'Hoşgeldin ${_userModel.user.userID}',
-                    style: TextStyle(fontFamily: 'Ubuntu'),
-                  )
-                : Text(
-                    "Kullanıcı ",
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      color: Color(0XFF4A148C),
-                    ),
-                  )
+           Text("Hoşgeldin  ${_userModel.user.userID}"),
           ],
         ),
       ),

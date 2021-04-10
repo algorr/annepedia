@@ -18,12 +18,22 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _displayUsername = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  bool isShowing = false;
+
+  //TextEditingController _displayUsername = TextEditingController();
+  //TextEditingController _emailController = TextEditingController();
+  //TextEditingController _passwordController = TextEditingController();
+
+  String _email, _password, _userName;
+
+  void _emailSifreKullaniciOlustur(BuildContext context) async {
+    _formKey.currentState.save();
+    debugPrint(
+        "email: " + _email + "şifre:" + _password);
+    final _userModel = Provider.of<UserModel>(context,listen: false);
+    Users _kayitOlanUser = await _userModel.createUserWithEmailandPassword(_email, _password);
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage(user: _kayitOlanUser)));
+  }
 
   _RegisterPageState();
 
@@ -39,16 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              isShowing == true
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        //value: 5,
-                        backgroundColor: Colors.purple,
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                      ),
-                    )
-                  : Container(),
+              Container(),
               Positioned(
                 top: 0,
                 left: 0,
@@ -114,30 +115,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     color: Colors.purple.shade50,
                                     borderRadius: BorderRadius.circular(29)),
                                 child: TextFormField(
-                                  //textAlignVertical:TextAlignVertical.center,
-                                  controller: _displayUsername,
-                                  validator: (String val) {
-                                    if (val.isEmpty) {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title:
-                                                  Text('Kullanıcı Adı Hatası'),
-                                              content: Text(
-                                                  'Kullanıcı adını boş geçilemez, lütfen uygun bir kullanıcı adı belirleyiniz'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text('Tamam'),
-                                                ),
-                                              ],
-                                            );
-                                          });
-                                    }
-                                    return null;
+                                  onSaved: (String girilenUserName) {
+                                    _userName = girilenUserName;
                                   },
                                   decoration: InputDecoration(
                                       hintText: 'Kullanıcı Adı',
@@ -166,51 +145,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     color: Colors.purple.shade50,
                                     borderRadius: BorderRadius.circular(29)),
                                 child: TextFormField(
-                                  controller: _emailController,
-                                  validator: (String val) {
-                                    if (val.isEmpty) {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: Text('Email Hatası'),
-                                              content: Text(
-                                                  'Email alanı boş geçilemez, lütfen uygun bir email giriniz'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text('Tamam'),
-                                                ),
-                                              ],
-                                            );
-                                          });
-                                    } else if (val.isNotEmpty) {
-                                      Pattern pattern =
-                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                      RegExp regex = new RegExp(pattern);
-
-                                      if (!regex.hasMatch(val))
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: Text('Email Hatası'),
-                                                content: Text(
-                                                    'Hatalı bir email adresi girdiniz, lütfen kontrol ederek tekrar giriniz'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Text('Tamam'),
-                                                  ),
-                                                ],
-                                              );
-                                            });
-                                    }
-                                    return null;
+                                  onSaved: (String girilenEmail) {
+                                    _email = girilenEmail;
                                   },
                                   decoration: InputDecoration(
                                       hintText: 'anne@annepedia.com',
@@ -240,31 +176,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                     color: Colors.purple.shade50,
                                     borderRadius: BorderRadius.circular(29)),
                                 child: TextFormField(
+                                  onSaved: (String girilenPassword) {
+                                    _password = girilenPassword;
+                                  },
                                   obscureText: true,
                                   keyboardType: TextInputType.visiblePassword,
-                                  controller: _passwordController,
-                                  validator: (String val) {
-                                    if (val.isEmpty) {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: Text('Şifre Hatası'),
-                                              content: Text(
-                                                  'Şifre alanı boş geçilemez, lütfen uygun bir şifre giriniz'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text('Tamam'),
-                                                ),
-                                              ],
-                                            );
-                                          });
-                                    }
-                                    return null;
-                                  },
+                                  //controller: _passwordController,
+
                                   decoration: InputDecoration(
                                       hintText: 'password',
                                       hintStyle: TextStyle(
@@ -289,12 +207,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     color: Colors.purple,
                                     padding: EdgeInsets.symmetric(
                                         vertical: 20, horizontal: 20),
-                                    onPressed: () async {
-                                      if (_formKey.currentState.validate()) {
-                                        isShowing = true;
-                                        _emailSifreKullaniciOlustur();
-                                      }
-                                    },
+                                    onPressed: () =>
+                                        _emailSifreKullaniciOlustur(context),
                                     child: Text(
                                       "KAYIT OL",
                                       style: TextStyle(
@@ -350,36 +264,5 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
-  }
-
-  void _emailSifreKullaniciOlustur() async {
-    final _userModel = Provider.of<UserModel>(context);
-    try {
-      UserCredential _userCredential =
-          await _auth.createUserWithEmailAndPassword(
-              email: _emailController.text, password: _passwordController.text);
-      User _newUser = _userCredential.user;
-      //isShowing == true;
-      if (_newUser != null) {
-        if (!_newUser.emailVerified) {
-          await _newUser.sendEmailVerification();
-
-          if (_auth.currentUser != null) {
-            await _auth.signOut();
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => WellComePage()));
-          }
-        }
-        await _newUser.updateProfile(displayName: _displayUsername.text);
-        //final user1 = _auth.currentUser;
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => HomePage(
-                  user: _userModel.user,
-                )));
-      }
-    } catch (e) {
-      debugPrint("******************HATA*******************");
-      debugPrint(e.toString());
-    }
   }
 }

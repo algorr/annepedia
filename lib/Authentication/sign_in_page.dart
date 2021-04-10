@@ -1,11 +1,8 @@
 import 'package:annepedia/Authentication/registerPage.dart';
 import 'package:annepedia/models/user.dart';
-import 'package:annepedia/services/auth_base.dart';
-import 'package:annepedia/services/firebase_auth_service.dart';
 import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../locator.dart';
 import '../pages/home_page.dart';
 
 class SignInPage extends StatefulWidget {
@@ -19,11 +16,10 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  //AuthBase authService = locator<FirebaseAuthService>();
 
   @override
   Widget build(BuildContext context) {
-    final _userModel = Provider.of<UserModel>(context,listen: true);
+    final _userModel = Provider.of<UserModel>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -277,13 +273,12 @@ class _SignInPageState extends State<SignInPage> {
 
   void _signIn(BuildContext context) async {
     _formKey.currentState.save();
-    final _userModel = Provider.of<UserModel>(context, listen: false);
+    final _userModel = Provider.of<UserModel>(context);
     try {
       Users _user = await _userModel.signInWithEmailAndPassword(
           _emailController.text, _passwordController.text);
-
       _user.userName = _displayUsername.text;
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
+      Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => HomePage(
                 user: _userModel.user,
               )));

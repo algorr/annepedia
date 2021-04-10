@@ -41,6 +41,7 @@ class FirebaseAuthService implements AuthBase {
           .user;
       return _userFromFirebase(user);
     } catch (e) {
+      print("firebase kayıt hatalı " +e.toString());
       return null;
     }
   }
@@ -54,6 +55,7 @@ class FirebaseAuthService implements AuthBase {
           .user;
       return _userFromFirebase(user);
     } catch (e) {
+      print("firebase kayıt hatalı " +e.toString());
       return null;
     }
   }

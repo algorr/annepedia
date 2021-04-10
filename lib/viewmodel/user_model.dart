@@ -32,7 +32,10 @@ class UserModel with ChangeNotifier implements AuthBase {
     try {
       state = ViewState.Busy;
       _user = await _userRepository.currentUser();
-     return _user;
+      if (_user != null)
+        return _user;
+      else
+        return null;
     } catch (e) {
       debugPrint("Viewmodeldeki current user hata:" + e.toString());
       return null;
@@ -64,12 +67,14 @@ class UserModel with ChangeNotifier implements AuthBase {
         state = ViewState.Busy;
         _user = await _userRepository.createUserWithEmailandPassword(
             email, password);
-
         return _user;
-      } finally {
+      } catch(e){
+        debugPrint("ViewModeldeki current user hata " + e.toString());
+        return null;
+      }finally {
         state = ViewState.Idle;
       }
-    } else
+    }else
       return null;
   }
 
@@ -80,11 +85,14 @@ class UserModel with ChangeNotifier implements AuthBase {
         state = ViewState.Busy;
         _user = await _userRepository.signInWithEmailAndPassword(email, sifre);
         return _user;
-      } else
-        return null;
-    } finally {
+      }
+    } catch(e){
+      debugPrint("ViewModeldeki current user hata " + e.toString());
+      return null;
+    }finally {
       state = ViewState.Idle;
     }
+    return null;
   }
 
   bool _emailSifreKontrol(String email, String sifre) {
@@ -103,9 +111,4 @@ class UserModel with ChangeNotifier implements AuthBase {
     return sonuc;
   }
 
-  @override
-  Future<Users> signInEmailPassword() {
-    // TODO: implement signInEmailPassword
-    throw UnimplementedError();
-  }
 }

@@ -10,12 +10,13 @@ class Users {
 
 
   Users({@required this.userID, @required this.email});
+
   Map<String, dynamic> toMap(){
     return {
       'userID' : userID,
       'email' : email,
       'userName' : userName,
-      'profilURL' : profilURL ?? '',
+      'profilURL' : profilURL,
       'createdAt' : createdAt,
       'updatedAt' : updatedAt,
       'seviye' : seviye,
