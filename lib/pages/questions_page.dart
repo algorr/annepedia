@@ -1,14 +1,14 @@
 import 'package:annepedia/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
-class Questions extends StatefulWidget {
+class QuestionsPage extends StatefulWidget {
   @override
-  _QuestionsState createState() => _QuestionsState();
+  _QuestionsPageState createState() => _QuestionsPageState();
 }
 
 enum Type { Type1, Type2, Type3, Type4 }
 
-class _QuestionsState extends State<Questions> {
+class _QuestionsPageState extends State<QuestionsPage> {
   Type myTape = Type.Type1;
 
   @override

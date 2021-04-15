@@ -1,12 +1,16 @@
+import 'package:annepedia/bottom_navi/my_custom_nottom_navi.dart';
+import 'package:annepedia/bottom_navi/tab_items.dart';
 import 'package:annepedia/models/user.dart';
+import 'package:annepedia/pages/calender_page.dart';
+import 'package:annepedia/pages/flow_page.dart';
 import 'package:annepedia/pages/profile_page.dart';
+import 'package:annepedia/pages/questions_page.dart';
+import 'package:annepedia/pages/search_page.dart';
 import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../locator.dart';
 
 class HomePage extends StatefulWidget {
-
   final Users user;
 
   HomePage({
@@ -19,80 +23,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TabItems _currentTab = TabItems.Home;
+
+  Map<TabItems, Widget> tumSayfalar() {
+    return {
+      TabItems.Home: FlowPage(),
+      TabItems.Search: SearchPage(),
+      TabItems.Questions: QuestionsPage(),
+      TabItems.Calender: CalendarPage(),
+      TabItems.Profile: ProfilePage(),
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final _userModel = Provider.of<UserModel>(context);
-    return Scaffold(
-      backgroundColor: Color(0XFFEEEEEE),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-                icon: Image.asset('assets/icons/home.png', color: Colors.white),
-                onPressed: () {}),
-            IconButton(
-                icon: Image.asset(
-                  'assets/icons/search.png',
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: Image.asset(
-                  'assets/icons/question.png',
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: Image.asset(
-                  'assets/icons/calendar.png',
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon:
-                    Image.asset('assets/icons/female.png', color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ProfilePage()));
-                }),
-          ],
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(36),
-          ),
-          color: Color(0XFF675185),
-        ),
-      ),
-      appBar: AppBar(
-        elevation: 0,
-        actions: [
-          Padding(
-              padding: EdgeInsets.only(right: 5.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.more_vert,
-                  color: Color(0XFF4A148C),
-                ),
-              )),
-        ],
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          'annepedia',
-          style: TextStyle(fontFamily: 'Ubuntu', color: Color(0XFF4A148C)),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-           Text("Hoşgeldin  ${_userModel.user.userID}"),
-          ],
-        ),
-      ),
+    return Container(
+      child: MyCustomNavi(
+          sayfaOlustur: tumSayfalar(),
+          currentTab: _currentTab,
+          onSelectedTab: (secilenTab) {
+            setState(() {
+              _currentTab = secilenTab;
+            });
+            print("Seçilen tab : " + secilenTab.toString());
+          }),
     );
   }
 }

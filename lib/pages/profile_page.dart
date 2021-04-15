@@ -24,53 +24,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-                icon: Image.asset('assets/icons/home.png', color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => HomePage(
-                            user: widget.user,
-                          )));
-                }),
-            IconButton(
-                icon: Image.asset(
-                  'assets/icons/search.png',
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: Image.asset(
-                  'assets/icons/question.png',
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: Image.asset(
-                  'assets/icons/calendar.png',
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon:
-                    Image.asset('assets/icons/female.png', color: Colors.white),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ProfilePage()));
-                }),
-          ],
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(36),
-          ),
-          color: Color(0XFF675185),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -106,7 +59,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
                               child: IconButton(
-                                  icon: Image.asset('assets/icons/settings.png'),
+                                  icon:
+                                      Image.asset('assets/icons/settings.png'),
                                   onPressed: () {}),
                             ),
                           ),
@@ -126,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           heightFactor: 1,
                           child: CircleAvatar(
                             child: IconButton(
-                              onPressed: (){},
+                              onPressed: () {},
                               icon: Icon(
                                 Icons.add_a_photo_rounded,
                                 size: 30,
@@ -168,7 +122,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Center(
                     child: Text(
                       'userName',
-                      style: TextStyle(fontSize: 15, fontFamily: 'Ubuntu',color: Color(0XFF675185),),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Ubuntu',
+                        color: Color(0XFF675185),
+                      ),
                     ),
                   ),
                 ),
@@ -190,16 +148,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           Text(
                             'Sorular',
                             style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                              color: Color(0XFF675185),),
+                              fontFamily: 'Ubuntu',
+                              fontSize: 15,
+                              color: Color(0XFF675185),
+                            ),
                           ),
                           Text(
                             '23',
                             style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                              color: Color(0XFF675185),),
+                              fontFamily: 'Ubuntu',
+                              fontSize: 15,
+                              color: Color(0XFF675185),
+                            ),
                           ),
                         ],
                       ),
@@ -215,16 +175,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           Text(
                             'Takip',
                             style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                              color: Color(0XFF675185),),
+                              fontFamily: 'Ubuntu',
+                              fontSize: 15,
+                              color: Color(0XFF675185),
+                            ),
                           ),
                           Text(
                             '1.3k',
                             style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                              color: Color(0XFF675185),),
+                              fontFamily: 'Ubuntu',
+                              fontSize: 15,
+                              color: Color(0XFF675185),
+                            ),
                           ),
                         ],
                       ),
@@ -240,16 +202,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           Text(
                             'Takipçi',
                             style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                              color: Color(0XFF675185),),
+                              fontFamily: 'Ubuntu',
+                              fontSize: 15,
+                              color: Color(0XFF675185),
+                            ),
                           ),
                           Text(
                             '2.8k',
                             style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                              color: Color(0XFF675185),),
+                              fontFamily: 'Ubuntu',
+                              fontSize: 15,
+                              color: Color(0XFF675185),
+                            ),
                           ),
                         ],
                       ),

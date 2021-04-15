@@ -273,7 +273,7 @@ class _SignInPageState extends State<SignInPage> {
 
   void _signIn(BuildContext context) async {
     _formKey.currentState.save();
-    final _userModel = Provider.of<UserModel>(context);
+    final _userModel = Provider.of<UserModel>(context,listen: false);
     try {
       Users _user = await _userModel.signInWithEmailAndPassword(
           _emailController.text, _passwordController.text);
