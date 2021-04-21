@@ -2,12 +2,9 @@ import 'dart:ui';
 import 'package:annepedia/models/user.dart';
 import 'package:annepedia/services/auth_base.dart';
 import 'package:annepedia/services/firebase_auth_service.dart';
-import 'package:annepedia/viewmodel/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../locator.dart';
-import 'home_page.dart';
 import 'wellComePage.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -33,11 +30,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 25, left: 10, right: 10),
+                      //margin: EdgeInsets.only(top: 25),
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.2,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(100),bottomLeft: Radius.circular(100)),
                           image: DecorationImage(
                               image: AssetImage('assets/images/realcoli.jpg'),
                               fit: BoxFit.fitWidth)),
@@ -55,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 280),
+                            margin: EdgeInsets.only(left: 300),
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
                               child: IconButton(

@@ -19,6 +19,7 @@ class FirebaseAuthService implements AuthBase {
   Users _userFromFirebase(User user) {
     if (user == null) return null;
     return Users(userID: user.uid, email: user.email, userName: user.displayName);
+
   }
 
   @override
@@ -39,6 +40,7 @@ class FirebaseAuthService implements AuthBase {
       User user = (await _firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password))
           .user;
+      print("şuan ki kullanıcı'nın kullanıcı adı : ${_userFromFirebase(user).userName}");
       return _userFromFirebase(user);
     } catch (e) {
       print("firebase kayıt hatalı " +e.toString());

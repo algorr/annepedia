@@ -19,16 +19,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  //TextEditingController _displayUsername = TextEditingController();
-  //TextEditingController _emailController = TextEditingController();
-  //TextEditingController _passwordController = TextEditingController();
 
   String _email, _password, _userName;
 
   void _emailSifreKullaniciOlustur(BuildContext context) async {
     _formKey.currentState.save();
     debugPrint(
-        "email: " + _email + "şifre:" + _password);
+        "email: " + _email + "şifre:" + _password + "kullanıcı:" + _userName);
     final _userModel = Provider.of<UserModel>(context,listen: false);
     Users _kayitOlanUser = await _userModel.createUserWithEmailandPassword(_email, _password, _userName);
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage(user: _kayitOlanUser)));

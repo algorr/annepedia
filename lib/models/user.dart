@@ -16,7 +16,7 @@ class Users {
     return {
       'userID' : userID,
       'email' : email,
-      'userName' : userName,
+      'userName' : userName ?? email.substring(0, email.indexOf('@')),
       'profilURL' : profilURL ?? '',
       'createdAt' : createdAt ?? FieldValue.serverTimestamp(),
       'updatedAt' : updatedAt ?? FieldValue.serverTimestamp(),
