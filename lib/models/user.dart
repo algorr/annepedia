@@ -23,4 +23,18 @@ class Users {
       'seviye' : seviye ?? 1,
     };
   }
+
+  Users.fromMap(Map<String, dynamic> map)
+    : userID = map['userID'],
+        email = map['email'],
+        userName = map['userName'],
+        profilURL = map['profilURL'],
+        createdAt = (map['createdAt'] as Timestamp).toDate(),
+        updatedAt = (map['updatedAt'] as Timestamp).toDate(),
+        seviye = map['seviye'];
+
+  @override
+  String toString() {
+    return 'Users{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, updatedAt: $updatedAt, seviye: $seviye}';
+  }
 }

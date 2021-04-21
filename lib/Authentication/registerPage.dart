@@ -19,16 +19,17 @@ class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
   String _email, _password, _userName;
 
   void _emailSifreKullaniciOlustur(BuildContext context) async {
     _formKey.currentState.save();
     debugPrint(
-        "email: " + _email + "şifre:" + _password + "kullanıcı:" + _userName);
-    final _userModel = Provider.of<UserModel>(context,listen: false);
-    Users _kayitOlanUser = await _userModel.createUserWithEmailandPassword(_email, _password, _userName);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage(user: _kayitOlanUser)));
+        "email: " + _email + "şifre:" + _password);
+    final _userModel = Provider.of<UserModel>(context, listen: false);
+    Users _kayitOlanUser = await _userModel.createUserWithEmailandPassword(
+        _email, _password, _userName);
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => HomePage(user: _kayitOlanUser)));
   }
 
   _RegisterPageState();
@@ -96,36 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  vertical: 10,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 5,
-                                ),
-                                //padding: EdgeInsets.only(left: 10,),
-                                width: size.width * 0.8,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                    color: Colors.purple.shade50,
-                                    borderRadius: BorderRadius.circular(29)),
-                                child: TextFormField(
-                                  onSaved: (String girilenUserName) {
-                                    _userName = girilenUserName;
-                                  },
-                                  decoration: InputDecoration(
-                                      hintText: 'Kullanıcı Adı',
-                                      hintStyle: TextStyle(
-                                          color: Colors.purple.shade100),
-                                      border: InputBorder.none,
-                                      //focusedBorder: InputBorder.none,
-                                      icon: Icon(
-                                        Icons.person,
-                                        color: Colors.purple.shade100,
-                                      )),
-                                ),
-                              ),
+
                               SizedBox(height: 1),
                               Container(
                                 margin: EdgeInsets.symmetric(
